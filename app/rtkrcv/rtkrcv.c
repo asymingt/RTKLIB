@@ -1757,7 +1757,7 @@ int main(int argc, char **argv)
     /* start rtk server */
     if (start&&!startsvr(&vt)) return -1;
     
-    signal(SIGINT, sigshut);     /* keyboard interrupt */
+    signal(SIGINT ,sigshut);    /* keyboard interrupt */
     signal(SIGTERM,sigshut);    /* external shutdown signal */
     signal(SIGUSR2,sigshut);
     signal(SIGHUP ,SIG_IGN);
