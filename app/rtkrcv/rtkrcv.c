@@ -241,14 +241,6 @@ static opt_t rcvopts[]={
     
     {"",0,NULL,""}
 };
-/* keyboard interrupt handler ------------------------------------------------*/
-static void sigint(int sig)
-{
-    trace(3,"sigint: sig=%d\n",sig);
-    
-    intflg|=1;
-    signal(sig,sigint); /* reset signal handler */
-}
 /* external stop signal ------------------------------------------------------*/
 static void sigshut(int sig)
 {
@@ -1765,7 +1757,7 @@ int main(int argc, char **argv)
     /* start rtk server */
     if (start&&!startsvr(&vt)) return -1;
     
-    signal(SIGINT, sigint);     /* keyboard interrupt */
+    signal(SIGINT ,sigshut);    /* keyboard interrupt */
     signal(SIGTERM,sigshut);    /* external shutdown signal */
     signal(SIGUSR2,sigshut);
     signal(SIGHUP ,SIG_IGN);
